@@ -1,0 +1,39 @@
+services:
+
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - .data/ollama:/root/.ollama
+    ports:
+      - 11434:11434
+    container_name: ollama
+    # gpu only below
+    #deploy:
+    #  resources:
+    #    reservations:
+    #      devices:
+    #        - driver: nvidia
+    #          count: all
+    #          capabilities:
+    #            - gpu
+  
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    volumes:
+        - .data/open-webui:/app/backend/data
+    #depends_on:
+    #  - ollama
+    ports:
+      - 3000:8090
+    environment:
+      - 'OLLAMA_BASE_URL=http://ollama:11434'
+    extra_hosts:
+      -  host.docker.internal:host-gateway
+    container_name: open-webui
+
+  #rag-app:
+  #  image: anavasp/rag:latest
+  #  ports:
+  #    - 8501:8501
+  #  environment:
+  #    - OLLAMA_MODEL=${OLLAMA_MODEL}
