@@ -7,15 +7,6 @@ services:
     ports:
       - 11434:11434
     container_name: ollama
-    # gpu only below
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: all
-              capabilities:
-                - gpu
   
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -24,7 +15,7 @@ services:
     #depends_on:
     #  - ollama
     ports:
-      - 3000:8080
+      - 3000:3000
     environment:
       - 'OLLAMA_BASE_URL=http://ollama:11434'
     extra_hosts:

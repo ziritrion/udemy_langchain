@@ -28,6 +28,7 @@ Given the LinkedIn information {information} about a person, I want you to creat
 
     chain = LLMChain(llm=llm, prompt=summary_prompt_template)
     linkedin_data = scrape_linkedin_profile(linkedin_profile_url="none", mock=True)
+    #print(linkedin_data)
     res = chain.invoke(input={'information': linkedin_data})
 
     print(res)
