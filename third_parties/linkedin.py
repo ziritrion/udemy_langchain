@@ -4,6 +4,7 @@ import requests
 def scrape_linkedin_profile(linkedin_profile_url: str, mock: bool = False):
     """scrape information from LinkedIn profiles,
     Manually scrape the information from the LinkedIn profile"""
+    
     if mock:
         linkedin_profile_url = 'https://gist.githubusercontent.com/ziritrion/60ac2dcde167ab438636812c1382f67c/raw/460e13a3173f1a4651fb80a8acd2103e862dd2c9/anp.json'
         response = requests.get(
